@@ -1,0 +1,26 @@
+cidr_vpc = "10.0.0.0/16"
+vpc_name = "QA_vpc"
+cidr_public = "10.0.4.0/24"
+cidr_private = "10.0.5.0/24"
+public_subnet_name = "Public_sub02"
+private_subnet_name = "Private_sub02"
+igw_name = "igw_02"
+route_table_name = "RT-02"
+#=================Security Vars================
+ingress_values = [{
+    port = 22
+    description = "ssh"
+},
+{
+    port = 80
+    description = "http"
+},
+{
+    port = 443
+    description = "https"
+}]
+#=================Instance Vars================
+ami_id = ""
+instance_type = "t2.micro"
+instance_name = "prod-01"
+
