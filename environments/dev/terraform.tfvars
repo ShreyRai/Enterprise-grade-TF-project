@@ -23,3 +23,4 @@ ingress_values = [{
 ami_id = ""
 instance_type = "t2.micro"
 instance_name = "dev-01"
+instance_names = ["web-dev-01", "web-dev-02", "web-dev-03"]

@@ -18,11 +18,12 @@ module "security" {
 }
 module "dev" {
     source = "../../modules/computing"
+    for_each = var.instance_names
     ami_id = var.ami_id
     instance_type = var.instance_type
     security_group_id = module.security.security_group_id.id
     is_bastion = true
-    instance_name = var.instance_name
+    instance_name = each.value
     public_subnet_id = module.network.public_subnet_id.id
     private_subnet_id = module.network.private_subnet_id.id
 }
