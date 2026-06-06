@@ -19,7 +19,7 @@ ingress_values = [{
     port = 443
     description = "https"
 }]
-#=================Instance Vars================
+#=================Instance Vars===================
 ami_id = "ami-00e801948462f718a"
 instance_type = "t2.micro"
 instance_name = "dev-01"

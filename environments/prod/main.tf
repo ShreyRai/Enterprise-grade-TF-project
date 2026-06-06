@@ -1,3 +1,12 @@
+terraform {
+    backend "s3" {
+        bucket = "tf-state-enterprise-grade"
+        key = "statefiles/prod/terraform.tfstate"
+        region = "us-east-1"
+        dynamodb_table = "tf-state-lock"
+        encrypt = true
+    }   
+}
 module "network" {
     source = "../../modules/networking"
     cidr_vpc = var.cidr_vpc
@@ -13,16 +22,17 @@ module "network" {
 module "security" {
     source = "../../modules/security"
     ingress_values = var.ingress_values
-    vpc_id = module.network.vpc_id.id
+    vpc_id = module.network.vpc_id
   
 }
 module "prod" {
     source = "../../modules/computing"
+    for_each = toset(var.instance_names)
     ami_id = var.ami_id
     instance_type = var.instance_type
-    security_group_id = module.security.security_group_id.id
+    security_group_id = module.security.security_group_id
     is_bastion = true
-    instance_name = var.instance_name
-    public_subnet_id = module.network.public_subnet_id.id
-    private_subnet_id = module.network.private_subnet_id.id
+    instance_name = each.value
+    public_subnet_id = module.network.public_subnet_id
+    private_subnet_id = module.network.private_subnet_id
 }

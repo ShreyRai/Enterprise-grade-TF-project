@@ -12,3 +12,4 @@ variable "ingress_values" {}
 variable "ami_id" {}
 variable "instance_type" {}
 variable "instance_name" {}
+variable "instance_names" {}

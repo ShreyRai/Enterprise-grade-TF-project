@@ -20,7 +20,8 @@ ingress_values = [{
     description = "https"
 }]
 #=================Instance Vars================
-ami_id = ""
-instance_type = "t2.micro"
-instance_name = "prod-01"
+ami_id = "ami-00e801948462f718a"
+instance_type = "t3.micro"
+instance_name = "qa-01"
+instance_names = ["web-qa-01", "web-qa-02", "web-qa-03"]
 

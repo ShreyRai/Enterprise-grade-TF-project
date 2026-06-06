@@ -20,7 +20,7 @@ ingress_values = [{
     description = "https"
 }]
 #=================Instance Vars================
-ami_id = ""
+ami_id = "ami-00e801948462f718a"
 instance_type = "t3.medium"
-instance_name = "prd-01"
-
+instance_name = "prod-01"
+instance_names = ["web-prod-01", "web-prod-02", "web-prod-03"]

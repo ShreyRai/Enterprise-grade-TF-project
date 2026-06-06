@@ -1,3 +1,13 @@
+terraform {
+    backend "s3" {
+        bucket = "tf-state-enterprise-grade"
+        key = "statefiles/dev/terraform.tfstate"
+        region = "us-east-1"
+        dynamodb_table = "tf-state-lock"
+        encrypt = true
+    }   
+}
+
 module "network" {
     source = "../../modules/networking"
     cidr_vpc = var.cidr_vpc
