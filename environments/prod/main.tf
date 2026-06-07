@@ -7,6 +7,18 @@ terraform {
         encrypt = true
     }   
 }
+
+data  "aws_ami" "ubuntu" {
+    most_recent = true
+    filter {
+        name = "name"
+        values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+    }
+    filter {
+        name = "virtualization-type"
+        values = ["hvm"]
+    }
+}
 module "network" {
     source = "../../modules/networking"
     cidr_vpc = var.cidr_vpc
@@ -28,7 +40,7 @@ module "security" {
 module "prod" {
     source = "../../modules/computing"
     for_each = toset(var.instance_names)
-    ami_id = var.ami_id
+    ami_id = data.aws_ami.ubuntu.id
     instance_type = var.instance_type
     security_group_id = module.security.security_group_id
     is_bastion = true

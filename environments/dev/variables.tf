@@ -9,7 +9,7 @@ variable "route_table_name" {}
 #=================Security Vars================
 variable "ingress_values" {}
 #=================Instance Vars================
-variable "ami_id" {}
+#variable "ami_id" {}
 variable "instance_type" {}
 variable "instance_name" {}
 variable "instance_names" {}
