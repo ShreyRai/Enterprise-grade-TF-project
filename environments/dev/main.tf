@@ -47,4 +47,5 @@ module "dev" {
     instance_name = each.value
     public_subnet_id = module.network.public_subnet_id
     private_subnet_id = module.network.private_subnet_id
+    user_data = file("${path.module}/bootstrap.sh")
 }
