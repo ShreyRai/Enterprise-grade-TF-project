@@ -13,3 +13,4 @@ variable "ingress_values" {}
 variable "instance_type" {}
 variable "instance_name" {}
 variable "instance_names" {}
+variable "path" {}

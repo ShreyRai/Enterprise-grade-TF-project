@@ -24,4 +24,4 @@ ingress_values = [{
 instance_type = "t3.micro"
 instance_name = "qa-01"
 instance_names = ["web-qa-01", "web-qa-02", "web-qa-03"]
-
+path = "/mnt/d/proj/Terraform/Enterprise-grade-TF-project/modules/computing/bootstrap.sh"

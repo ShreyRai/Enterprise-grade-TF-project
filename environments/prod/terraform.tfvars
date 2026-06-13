@@ -24,3 +24,4 @@ ingress_values = [{
 instance_type = "t3.medium"
 instance_name = "prod-01"
 instance_names = ["web-prod-01", "web-prod-02", "web-prod-03"]
+path = "/mnt/d/proj/Terraform/Enterprise-grade-TF-project/modules/computing/bootstrap.sh"
