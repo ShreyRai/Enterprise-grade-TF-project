@@ -6,3 +6,9 @@ variable "cidr_public" {}
 variable "cidr_private" {}
 variable "igw_name" {}
 variable "route_table_name" {}
+variable "count_prod_pub_sub" {}
+variable "prod_private_subnet_name" {}
+variable "nat_gateway_name" {}
+variable "nat_eip_name" {}
+variable "route_table_name_2" {}
+variable "cidr_prod_private" {}

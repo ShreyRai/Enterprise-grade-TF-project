@@ -1,20 +1,20 @@
 terraform {
     backend "s3" {
-        bucket = "tf-state-enterprise-grade"
+        bucket = "tf-state-enterprise-grade-1"
         key = "statefiles/prod/terraform.tfstate"
         region = "us-east-1"
-        dynamodb_table = "tf-state-lock"
+        use_lockfile = true
         encrypt = true
     }   
 }
-
+  
 data "aws_ami" "azlinux23" {
   most_recent = true
   owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["al2023-ami-*"]
+    values = ["al2023-ami-2023*"]
   }
 
   filter {
@@ -32,6 +32,12 @@ module "network" {
     private_subnet_name = var.private_subnet_name
     igw_name = var.igw_name
     route_table_name = var.route_table_name
+    count_prod_pub_sub = var.count_prod_pub_sub
+    prod_private_subnet_name = var.prod_private_subnet_name
+    nat_gateway_name = var.nat_gateway_name
+    nat_eip_name = var.nat_eip_name
+    route_table_name_2 = var.route_table_name_2
+    cidr_prod_private = var.cidr_prod_private
 }
 
 module "security" {
@@ -41,14 +47,28 @@ module "security" {
   
 }
 module "prod" {
-    source = "../../modules/computing"
-    for_each = toset(var.instance_names)
-    ami_id = data.aws_ami.azlinux23.id
+    source = "../../modules/autoscaling"
+    # for_each = toset(var.instance_names)
+    # ami_id = data.aws_ami.azlinux23.id
     instance_type = var.instance_type
-    security_group_id = module.security.security_group_id
-    is_bastion = true
-    instance_name = each.value
-    public_subnet_id = module.network.public_subnet_id
-    private_subnet_id = module.network.private_subnet_id
-    user_data = file("${path.module}/user_data.sh")
+    #security_group_id = module.security.security_group_id
+    # is_bastion = true
+    # instance_name = each.value
+    # public_subnet_id = module.network.public_subnet_id
+    # private_subnet_id = module.network.private_subnet_id
+    # ec2_ssm_role          = "${each.value}-ssm-role"
+    # instance_profile_name = "${each.value}-ssm-instance-profile"
+    user_data             = base64encode(file(var.path))
+    aws_launch_template_name = var.aws_launch_template_name
+    image_id = data.aws_ami.azlinux23.id
+    asg_name = var.asg_name
+    min_size = var.min_size
+    max_size = var.max_size
+    desired_capacity = var.desired_capacity
+    subnet_ids = module.network.prod_private_subnet_ids
+    asq_tag_name = var.asq_tag_name
+    security_group_ids = [module.security.security_group_id]
+
+
+
 }

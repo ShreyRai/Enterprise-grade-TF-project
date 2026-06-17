@@ -3,7 +3,7 @@ terraform {
         bucket = "tf-state-enterprise-grade"
         key = "statefiles/qa/terraform.tfstate"
         region = "us-east-1"
-        dynamodb_table = "tf-state-lock"
+        use_lockfile = true
         encrypt = true
     }   
 }
@@ -13,7 +13,7 @@ data "aws_ami" "azlinux23" {
 
   filter {
     name   = "name"
-    values = ["al2023-ami-*"]
+    values = ["al2023-ami-2023*"]
   }
 
   filter {
@@ -49,5 +49,7 @@ module "qa" {
     instance_name = each.value
     public_subnet_id = module.network.public_subnet_id
     private_subnet_id = module.network.private_subnet_id
-    user_data = file(var.path)
+    ec2_ssm_role          = "${each.value}-ssm-role"
+    instance_profile_name = "${each.value}-ssm-instance-profile"
+    user_data             = file(var.path)
 }

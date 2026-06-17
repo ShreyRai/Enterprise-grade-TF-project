@@ -22,6 +22,5 @@ ingress_values = [{
 #=================Instance Vars================
 #ami_id = "ami-00e801948462f718a"
 instance_type = "t3.micro"
-instance_name = "qa-01"
-instance_names = ["web-qa-01", "web-qa-02", "web-qa-03"]
+instance_names = ["web-qa", "web-qa-bak"]
 path = "/mnt/d/proj/Terraform/Enterprise-grade-TF-project/modules/computing/bootstrap.sh"
