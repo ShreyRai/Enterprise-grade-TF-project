@@ -144,7 +144,15 @@ jobs:
               run: terraform init 
             - name: Terraform Plan
               working-directory: environments/prod
-              run: terraform plan
+              run: |
+               terraform plan
+               pwd
+               echo "Current directory contents:"
+               ls -la
+               echo "Modules directory:"
+               ls -la ../../modules
+               sleep 90
+    
     Prod-Deploy:
         runs-on: ubuntu-latest
         needs: [Prod-Plan]
