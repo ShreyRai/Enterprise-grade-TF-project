@@ -14,14 +14,22 @@ nat_eip_name = "eip-03"
 ingress_values = [{
     port = 22
     description = "ssh"
+    protocol = "tcp"
 },
 {
     port = 80
     description = "http"
+    protocol = "tcp"
 },
 {
     port = 443
     description = "https"
+    protocol = "tcp"
+},
+{
+    port = -1
+    description = "ping"
+    protocol = "icmp"
 }]
 #=================Instance Vars================
 #ami_id = "ami-00e801948462f718a"
@@ -32,10 +40,10 @@ path = "/mnt/d/proj/Terraform/Enterprise-grade-TF-project/modules/computing/boot
 
 #====================ASG vars====================
 aws_launch_template_name = "prod-launch-template"
-asg_name = "prod-asg"
+asg_name = "prod-asg-"
 min_size = 1
 max_size = 5
 desired_capacity = 2
-asq_tag_name = "prod-asg-tag"
+asq_tag_name = "prod-srv"
 count_prod_pub_sub = 3
 prod_private_subnet_name = "Prod-private-subnet"

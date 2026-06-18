@@ -6,7 +6,7 @@ resource "aws_security_group" "sg-01" {
           description = ingress.value.description
           to_port = ingress.value.port
           from_port = ingress.value.port
-          protocol = "tcp"
+          protocol = ingress.value.protocol
           cidr_blocks = ["0.0.0.0/0"]
         }
 

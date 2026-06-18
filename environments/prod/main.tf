@@ -31,6 +31,7 @@ module "network" {
     public_subnet_name = var.public_subnet_name
     private_subnet_name = var.private_subnet_name
     igw_name = var.igw_name
+    enable_NAT = true
     route_table_name = var.route_table_name
     count_prod_pub_sub = var.count_prod_pub_sub
     prod_private_subnet_name = var.prod_private_subnet_name

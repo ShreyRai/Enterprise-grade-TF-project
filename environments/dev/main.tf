@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket       = "tf-state-enterprise-grade"
+    bucket       = "tf-state-enterprise-grade-1"
     key          = "statefiles/dev/terraform.tfstate"
     region       = "us-east-1"
     use_lockfile = true
@@ -33,6 +33,7 @@ module "network" {
   private_subnet_name = var.private_subnet_name
   igw_name            = var.igw_name
   route_table_name    = var.route_table_name
+  enable_NAT          = false
 }
 
 module "security" {
