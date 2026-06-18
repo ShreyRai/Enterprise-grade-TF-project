@@ -36,12 +36,12 @@ jobs:
             - name: Checking the dependeny
               working-directory: Dependency_check
               run: terraform fmt
-            - name: Validate
-              working-directory: Dependency_check
-              run: terraform validate
             - name: Initialize the terraform
               working-directory: Dependency_check
               run: terraform init
+            - name: Validate
+              working-directory: Dependency_check
+              run: terraform validate
             - name: Apply
               working-directory: Dependency_check
               run: terraform apply -auto-approve
