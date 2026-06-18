@@ -35,11 +35,16 @@ jobs:
                 aws-region: us-east-1
             - name: Checking the dependeny
               working-directory: Dependency_check
-              run: |
-                terraform fmt -check
-                terraform validate
-                terraform init
-                terraform apply -auto-approve
+              run: terraform fmt
+            - name: Validate
+              working-directory: Dependency_check
+              run: terraform validate
+            - name: Initialize the terraform
+              working-directory: Dependency_check
+              run: terraform init
+            - name: Apply
+              working-directory: Dependency_check
+              run: terraform apply -auto-approve
             - name: If code is success
               if: success()
               run: echo "The bucket is either Created or already exists! You are good to go for main Implementation."
