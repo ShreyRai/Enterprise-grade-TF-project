@@ -68,8 +68,8 @@ jobs:
             - name: Terraform Plan
               working-directory: environments/dev
               run: |
-               echo ${path.module}
-               echo ${pwd}
+               echo $path.module
+               echo $(pwd)
                sleep 90
                terraform plan
     Dev-Deploy:
