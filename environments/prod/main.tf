@@ -59,7 +59,7 @@ module "prod" {
     # private_subnet_id = module.network.private_subnet_id
     # ec2_ssm_role          = "${each.value}-ssm-role"
     # instance_profile_name = "${each.value}-ssm-instance-profile"
-    user_data             = base64encode(file("${path.module}/bootstrap.sh"))
+    #user_data             = base64encode(file("${path.module}/bootstrap.sh"))
     aws_launch_template_name = var.aws_launch_template_name
     image_id = data.aws_ami.azlinux23.id
     asg_name = var.asg_name
@@ -69,7 +69,5 @@ module "prod" {
     subnet_ids = module.network.prod_private_subnet_ids
     asq_tag_name = var.asq_tag_name
     security_group_ids = [module.security.security_group_id]
-
-
 
 }

@@ -1,7 +1,9 @@
 variable "image_id" {}
 variable "instance_type" {}
 variable "security_group_ids" {}
-variable "user_data" {}
+variable "user_data" {
+    default = null
+}
 variable "min_size" {}
 variable "max_size" {}
 variable "desired_capacity" {}

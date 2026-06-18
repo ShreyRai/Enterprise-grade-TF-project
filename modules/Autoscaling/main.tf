@@ -3,7 +3,7 @@ resource "aws_launch_template" "alt-01" {
   image_id = var.image_id
   instance_type = var.instance_type
   vpc_security_group_ids = var.security_group_ids
-  user_data = var.user_data
+  user_data = var.user_data != null ? var.user_data : base64encode(file("${path.module}/bootstrap.sh"))
   lifecycle {
     create_before_destroy = true
   }
