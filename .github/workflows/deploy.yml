@@ -20,38 +20,38 @@ jobs:
               run: terraform fmt -check
             - name: Terraform Validate
               run: terraform validate
-    Dependency-check:
-        runs-on: ubuntu-latest
-        timeout-minutes: 5
-        needs: Pre-checks
-        steps:
-            - name: Checking out code
-              uses: actions/checkout@v5
-            - name: Terraform setup
-              uses: hashicorp/setup-terraform@v3
-            - name: Connect to AWS
-              uses: aws-actions/configure-aws-credentials@v4
-              with:
-                role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
-                aws-region: us-east-1
-            - name: Checking the dependeny
-              working-directory: Dependency_check
-              run: terraform fmt
-            - name: Initialize the terraform
-              working-directory: Dependency_check
-              run: terraform init
-            - name: Validate
-              working-directory: Dependency_check
-              run: terraform validate
-            - name: Apply
-              working-directory: Dependency_check
-              run: terraform apply -auto-approve
-            - name: If code is success
-              if: success()
-              run: echo "The bucket is either Created or already exists! You are good to go for main Implementation."
+    # Dependency-check:
+    #     runs-on: ubuntu-latest
+    #     timeout-minutes: 5
+    #     needs: Pre-checks
+    #     steps:
+    #         - name: Checking out code
+    #           uses: actions/checkout@v5
+    #         - name: Terraform setup
+    #           uses: hashicorp/setup-terraform@v3
+    #         - name: Connect to AWS
+    #           uses: aws-actions/configure-aws-credentials@v4
+    #           with:
+    #             role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
+    #             aws-region: us-east-1
+    #         - name: Checking the dependeny
+    #           working-directory: Dependency_check
+    #           run: terraform fmt
+    #         - name: Initialize the terraform
+    #           working-directory: Dependency_check
+    #           run: terraform init
+    #         - name: Validate
+    #           working-directory: Dependency_check
+    #           run: terraform validate
+    #         - name: Apply
+    #           working-directory: Dependency_check
+    #           run: terraform apply -auto-approve
+    #         - name: If code is success
+    #           if: success()
+    #           run: echo "The bucket is either Created or already exists! You are good to go for main Implementation."
     Dev-Plan:
         runs-on: ubuntu-latest
-        needs: [Pre-checks, Dependency-check]
+        needs: [Pre-checks] #, Dependency-check]
         steps:
             - name: Code Checkout
               uses: actions/checkout@v5
@@ -140,10 +140,10 @@ jobs:
                 role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
                 aws-region: us-east-1
             - name: Terraform Init
-              working-directory: environments/qa
+              working-directory: environments/prod
               run: terraform init 
             - name: Terraform Plan
-              working-directory: environments/qa
+              working-directory: environments/prod
               run: terraform plan
     Prod-Deploy:
         runs-on: ubuntu-latest
@@ -159,7 +159,7 @@ jobs:
                 role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
                 aws-region: us-east-1
             - name: Terraform apply
-              working-directory: environments/qa
+              working-directory: environments/prod
               run: |
                terraform init
                terraform apply -auto-approve
