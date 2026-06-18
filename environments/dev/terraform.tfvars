@@ -8,16 +8,24 @@ igw_name            = "igw_01"
 route_table_name    = "RT-01"
 #=================Security Vars================
 ingress_values = [{
-  port        = 22
-  description = "ssh"
+    port = 22
+      description = "ssh"
+      protocol = "tcp"
   },
   {
-    port        = 80
-    description = "http"
+      port = 80
+      description = "http"
+      protocol = "tcp"
   },
   {
-    port        = 443
-    description = "https"
+      port = 443
+      description = "https"
+      protocol = "tcp"
+  },
+  {
+      port = -1
+      description = "ping"
+      protocol = "icmp"
 }]
 #=================Instance Vars===================
 #ami_id = "ami-00e801948462f718a"

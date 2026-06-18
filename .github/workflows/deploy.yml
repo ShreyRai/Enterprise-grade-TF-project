@@ -70,7 +70,6 @@ jobs:
               run: |
                echo $path.module
                echo $(pwd)
-               sleep 90
                terraform plan
     Dev-Deploy:
         runs-on: ubuntu-latest
