@@ -22,6 +22,7 @@ jobs:
               run: terraform validate
     Dependency-check:
         runs-on: ubuntu-latest
+        timeout-minutes: 5
         needs: Pre-checks
         steps:
             - name: Checking out code
