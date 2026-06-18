@@ -34,7 +34,7 @@ resource "aws_instance" "ec2-01" {
     vpc_security_group_ids = [var.security_group_id]
     subnet_id = local.subnet_id
     associate_public_ip_address = var.is_bastion ? true : false
-    user_data = var.user_data != null ? var.user_data : file("${path.module}/modules/bootstrap.sh")
+    user_data = var.user_data != null ? var.user_data : file("${path.module}/bootstrap.sh")
     iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
     tags = {
       "Name" = var.instance_name
