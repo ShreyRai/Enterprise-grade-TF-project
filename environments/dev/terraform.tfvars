@@ -24,4 +24,4 @@ ingress_values = [{
 instance_type  = "t2.micro"
 instance_name  = "dev-01"
 instance_names = ["web-dev", "web-dev-bak"]
-path           = "/mnt/d/proj/Terraform/Enterprise-grade-TF-project/modules/computing/bootstrap.sh"
+path           = "Enterprise-grade-TF-project/modules/computing/bootstrap.sh"

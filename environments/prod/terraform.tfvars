@@ -36,7 +36,7 @@ ingress_values = [{
 instance_type = "t2.medium"
 instance_name = "prod-01"
 instance_names = ["web-prod", "web-prod-bak"]
-path = "/mnt/d/proj/Terraform/Enterprise-grade-TF-project/modules/computing/bootstrap.sh"
+path = "Enterprise-grade-TF-project/modules/computing/bootstrap.sh"
 
 #====================ASG vars====================
 aws_launch_template_name = "prod-launch-template"
