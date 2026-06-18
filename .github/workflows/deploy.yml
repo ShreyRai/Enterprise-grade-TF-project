@@ -67,7 +67,11 @@ jobs:
               run: terraform init 
             - name: Terraform Plan
               working-directory: environments/dev
-              run: terraform plan
+              run: |
+               echo ${path.module}
+               echo ${pwd}
+               sleep 90
+               terraform plan
     Dev-Deploy:
         runs-on: ubuntu-latest
         needs: [Dev-Plan]
