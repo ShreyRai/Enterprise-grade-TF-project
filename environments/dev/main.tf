@@ -54,5 +54,5 @@ module "dev" {
   private_subnet_id     = module.network.private_subnet_id
   ec2_ssm_role          = "${each.value}-ssm-role"
   instance_profile_name = "${each.value}-ssm-instance-profile"
-  user_data             = file(var.path)
+  user_data             = file("${path.module}/bootstrap.sh")
 }
