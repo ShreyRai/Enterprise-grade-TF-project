@@ -48,7 +48,7 @@ module "security" {
   
 }
 module "prod" {
-    source = "../../modules/autoscaling"
+    source = "../../modules/Autoscaling"
     # for_each = toset(var.instance_names)
     # ami_id = data.aws_ami.azlinux23.id
     instance_type = var.instance_type
