@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket       = "tf-state-bucket-enterprise-grade"
+    bucket       = "tf-state-enterprise-grade-bucket-1"
     key          = "statefiles/qa/terraform.tfstate"
     region       = "us-east-1"
     use_lockfile = true
