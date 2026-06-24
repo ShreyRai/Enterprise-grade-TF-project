@@ -32,7 +32,7 @@ jobs:
     #         - name: Connect to AWS
     #           uses: aws-actions/configure-aws-credentials@v4
     #           with:
-    #             role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
+    #             role-to-assume: arn:aws:iam::471112567703:role/terraform-enterprise-s3-role
     #             aws-region: us-east-1
     #         - name: Checking the dependeny
     #           working-directory: Dependency_check
@@ -60,7 +60,7 @@ jobs:
             - name: Connect to AWS
               uses: aws-actions/configure-aws-credentials@v4
               with:
-                role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
+                role-to-assume: arn:aws:iam::471112567703:role/terraform-enterprise-s3-role
                 aws-region: us-east-1
             - name: Terraform Init
               working-directory: environments/dev
@@ -82,7 +82,7 @@ jobs:
             - name: Connect to AWS
               uses: aws-actions/configure-aws-credentials@v4
               with:
-                role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
+                role-to-assume: arn:aws:iam::471112567703:role/terraform-enterprise-s3-role
                 aws-region: us-east-1
             - name: Terraform apply
               working-directory: environments/dev
@@ -100,7 +100,7 @@ jobs:
             - name: Connect to AWS
               uses: aws-actions/configure-aws-credentials@v4
               with:
-                role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
+                role-to-assume: arn:aws:iam::471112567703:role/terraform-enterprise-s3-role
                 aws-region: us-east-1
             - name: Terraform Init
               working-directory: environments/qa
@@ -110,6 +110,7 @@ jobs:
               run: terraform plan
     QA-Deploy:
         runs-on: ubuntu-latest
+        environment: qa
         needs: [QA-Plan]
         steps:
             - name: Code Checkout
@@ -119,7 +120,7 @@ jobs:
             - name: Connect to AWS
               uses: aws-actions/configure-aws-credentials@v4
               with:
-                role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
+                role-to-assume: arn:aws:iam::471112567703:role/terraform-enterprise-s3-role
                 aws-region: us-east-1
             - name: Terraform apply
               working-directory: environments/qa
@@ -137,7 +138,7 @@ jobs:
             - name: Connect to AWS
               uses: aws-actions/configure-aws-credentials@v4
               with:
-                role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
+                role-to-assume: arn:aws:iam::471112567703:role/terraform-enterprise-s3-role
                 aws-region: us-east-1
             - name: Terraform Init
               working-directory: environments/prod
@@ -158,6 +159,7 @@ jobs:
     Prod-Deploy:
         runs-on: ubuntu-latest
         needs: [Prod-Plan]
+        environment: dev
         steps:
             - name: Code Checkout
               uses: actions/checkout@v5
@@ -166,7 +168,7 @@ jobs:
             - name: Connect to AWS
               uses: aws-actions/configure-aws-credentials@v4
               with:
-                role-to-assume: arn:aws:iam::339713120550:role/terraform-enterprise-s3-role
+                role-to-assume: arn:aws:iam::471112567703:role/terraform-enterprise-s3-role
                 aws-region: us-east-1
             - name: Terraform apply
               working-directory: environments/prod
